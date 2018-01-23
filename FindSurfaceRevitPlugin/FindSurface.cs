@@ -1,35 +1,37 @@
-//#define _USE_UNITY_ANDROID_
-//#define _USE_UNITY_IOS_
-
 using System;
 using System.Runtime.InteropServices;
-#if _USE_UNITY_ANDROID_ || _USE_UNITY_IOS_
-using UnityEngine;
-#else
 using System.Numerics;
-#endif
-
-/*
- * .NET 3.X 버전 이상부터는 DllImport 시 CallingConvention, Cdecl을 명시해 줘야 함
- * Unity의 경우 .NET 2.0을 쓰는 것으로 알고 있어서 필요없을 것 같음...
- * 문제는 .NET 3.X버전 이상에서도 Debug 중에만 Warning으로 PInvokeStackImbalacne가 잡힐 뿐... 정상적으로 동작함...
- * 심지어 해당 Warning 검사는 끌 수 있다고...
- */
-
-// Unity-Android  [DllImport ("FindSurface")]   // libFindSurface.so
-// Unity-iOS      [DllImport ("__Internal")]
-// Win32          [DllImport ("FindSurface.dll", CallingConvention = CallingConvention.Cdecl)]
 
 namespace CurvSurf
 {
-    public enum FS_FEATURE_TYPE: UInt32 {
+	public enum FS_CONTEXT_CREATION_ERROR: Int32
+	{
+		FS_NO_ERROR			=  0,
+		FS_OUT_OF_MEMORY	= -1,
+		FS_LICENSE_EXPIRED	= -3,
+		FS_LICENSE_UNKNOWN	= -4,
+	};
+
+	public enum FS_ERROR: Int32
+	{
+		FS_NO_ERROR            = FS_CONTEXT_CREATION_ERROR.FS_NO_ERROR,
+		FS_OUT_OF_MEMORY       = FS_CONTEXT_CREATION_ERROR.FS_OUT_OF_MEMORY,
+		FS_INVALID_OPERATION   = -2,
+		FS_LICENSE_EXPIRED     = FS_CONTEXT_CREATION_ERROR.FS_LICENSE_EXPIRED,
+		FS_LICENSE_UNKNOWN     = FS_CONTEXT_CREATION_ERROR.FS_LICENSE_UNKNOWN,
+		FS_INVALID_ENUM        = -100,
+		FS_INVALID_VALUE       = -101,
+		FS_NOT_FOUND           = -200,
+		FS_UNACCEPTABLE_RESULT = -201
+	};
+
+	public enum FS_FEATURE_TYPE: UInt32 {
 		FS_TYPE_ANY      = 0,
 		FS_TYPE_PLANE    = 1,
 		FS_TYPE_SPHERE   = 2,
 		FS_TYPE_CYLINDER = 3,
 		FS_TYPE_CONE     = 4,
 		FS_TYPE_TORUS    = 5,
-		FS_TYPE_BOX      = 6,
         FS_TYPE_NONE     = 0xFFFFFFFF
 	};
 
@@ -233,12 +235,35 @@ namespace CurvSurf
 			}
 			return instance;
 		}
+		public static FindSurface GetInstance(ref FS_CONTEXT_CREATION_ERROR err)
+		{
+			if(instance==null)
+			{
+				FS_CONTEXT_CREATION_ERROR ret = FS_CONTEXT_CREATION_ERROR.FS_NO_ERROR;
+				instance = new FindSurface(ref ret);
+				if( ret !=FS_CONTEXT_CREATION_ERROR.FS_NO_ERROR || instance.context == IntPtr.Zero)
+				{
+					instance = null; // Failed to Initialized...
+					err = ret;
+				}
+			}
+			else { err =FS_CONTEXT_CREATION_ERROR.FS_NO_ERROR; }
+			return instance;
+		}
 
 		private FindSurface() {
 			IntPtr _tmp = new IntPtr();
 			if( createFindSurface(ref _tmp) == 0 ) {
 				context = _tmp;
 			}
+		}
+
+		private FindSurface(ref FS_CONTEXT_CREATION_ERROR err)
+		{
+			IntPtr _tmp = new IntPtr();
+			int ret = createFindSurface(ref _tmp);
+			if(ret == 0) { context=_tmp; }
+			err = (FS_CONTEXT_CREATION_ERROR)ret;
 		}
 
 		~FindSurface() {

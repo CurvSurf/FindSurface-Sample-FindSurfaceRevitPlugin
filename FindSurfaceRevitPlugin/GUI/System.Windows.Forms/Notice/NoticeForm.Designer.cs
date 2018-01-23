@@ -48,6 +48,7 @@
 			// 
 			this.richTextBox.Location = new System.Drawing.Point(13, 109);
 			this.richTextBox.Name = "richTextBox";
+			this.richTextBox.ReadOnly = true;
 			this.richTextBox.Size = new System.Drawing.Size(485, 154);
 			this.richTextBox.TabIndex = 3;
 			this.richTextBox.Text = resources.GetString("richTextBox.Text");

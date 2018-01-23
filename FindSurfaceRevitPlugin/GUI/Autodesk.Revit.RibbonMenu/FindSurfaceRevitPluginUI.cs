@@ -87,7 +87,7 @@ namespace FindSurfaceRevitPlugin
 		{
 			SetupUI( application );
 
-			FindSurfaceRevitPlugin.OnPluginStartUp();
+			if(FindSurfaceRevitPlugin.OnPluginStartUp()==false) return Result.Failed;
 
 			// subscribe Revit internal event callback
 			application.Idling+=new EventHandler<Autodesk.Revit.UI.Events.IdlingEventArgs>( (sender, e)=>FindSurfaceRevitPlugin.OnPluginIdling() );

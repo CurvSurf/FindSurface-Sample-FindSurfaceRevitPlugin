@@ -42,11 +42,28 @@ namespace FindSurfaceRevitPlugin
 		/// <summary>
 		/// Initializes FindSurface, custom point cloud engines, DirectShapeManager instances when Revit loaded this plugin.
 		/// </summary>
-		public static void OnPluginStartUp()
+		public static bool OnPluginStartUp()
 		{
-			// initialize FindSurface
-			s_find_surface=FindSurface.GetInstance();
+			FS_CONTEXT_CREATION_ERROR error = FS_CONTEXT_CREATION_ERROR.FS_NO_ERROR;
 
+			// initialize FindSurface
+			s_find_surface=FindSurface.GetInstance(ref error);
+
+			switch(error)
+			{
+				case FS_CONTEXT_CREATION_ERROR.FS_OUT_OF_MEMORY:
+				TaskDialog.Show("FindSurface", "Context creation failed: FS_OUT_OF_MEMORY");
+				return false;
+
+				case FS_CONTEXT_CREATION_ERROR.FS_LICENSE_EXPIRED:
+				TaskDialog.Show("FindSurface", "Context creation failed: FS_LICENSE_EXPIRED");
+				return false;
+
+				case FS_CONTEXT_CREATION_ERROR.FS_LICENSE_UNKNOWN:
+				TaskDialog.Show("FindSurface", "Context creation failed: FS_LICENSE_UNKNOWN");
+				return false;
+			}
+			
 			// initialize parameters temporarily
 			FindSurface.Accuracy=0.003f;      // Set Sensor Measurement Accuracy 
 			FindSurface.MeanDistance=0.01f;  // Set Mean Distance of Neighboring Points
@@ -60,6 +77,8 @@ namespace FindSurfaceRevitPlugin
 
 			// initialize DirectShape Engines
 			s_direct_shape_manager=new DirectShapeEngine();
+
+			return true;
 		}
 
 		/// <summary>
