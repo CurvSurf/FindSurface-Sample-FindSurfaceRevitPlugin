@@ -10,9 +10,13 @@ This program is designed to demonstrate a possibility of showing a new method, m
 
 This sample plug-in performs only basic functions as an example using FindSurface SDK and is not suitable for practical use.
 
-**The sample only runs with our FindSurface SDK library files (FindSurface.dll, etc.).**
+**The sample only runs with our [FindSurface SDK library files](https://developers.curvsurf.com/downloads.jsp) (FindSurface.dll, etc.).**
 
 **You must either [request a free trial](http://developers.curvsurf.com/licenses.jsp) or [purchase a license](https://developers.curvsurf.com/licenses.jsp) to activate the library files.**
+
+**Please read and follow the instructions [here](https://developers.curvsurf.com/documentation.jsp) > GUIDES > How-To > License Activation, before you activate the SDK license.**
+
+**Warning: Please follow the instructions above before you run Revit with our protected SDK. It may cause Revit to be not responding due to the failure of license validation.**
 
 
 Quick Start
