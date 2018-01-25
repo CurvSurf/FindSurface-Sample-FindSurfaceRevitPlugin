@@ -35,7 +35,7 @@ The following instructions briefly describes the functionalities provided by our
 
 - Point cloud
 
-	- Open: loading a point cloud file.
+	- Open: loading a point cloud file (xyz file format only).
 	- Clean up: removing every components in a Revit workspace.
 	- Reset: only removing recent parametric geometry data you obtained.
 

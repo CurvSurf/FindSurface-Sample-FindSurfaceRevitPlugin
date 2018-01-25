@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+  	<Name>FindSurfaceRevitPlugin.FindSurfaceRevitPluginUI</Name>
+    <Assembly>Plugin-DLL-path\FindSurfaceRevitPlugin.dll</Assembly>
+    <AddInId>604b1052-f742-4951-8576-c261d1993109</AddInId>
+    <FullClassName>FindSurfaceRevitPlugin.FindSurfaceRevitPluginUI</FullClassName>
+    <VendorId>CurvSurf</VendorId>
+    <VendorDescription>none</VendorDescription>
+  </AddIn>
+</RevitAddIns>
