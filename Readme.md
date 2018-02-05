@@ -4,6 +4,11 @@
 Overview
 --------
 
+[![FindSurface RevitPlugin](http://img.youtube.com/vi/ThpXAFJEBJ4/0.jpg)](https://www.youtube.com/watch?v=ThpXAFJEBJ4&feature=youtu.be)
+
+
+YouTube link: https://youtu.be/ThpXAFJEBJ4
+
 This sample code is Revit plugin source code developed by using our FindSurface SDK.
 
 This program is designed to demonstrate a possibility of showing a new method, more effective and much simpler than an old fashioned way, to get the structures primitives just by using its point cloud data.

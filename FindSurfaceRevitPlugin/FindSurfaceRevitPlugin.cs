@@ -193,6 +193,7 @@ namespace FindSurfaceRevitPlugin
 			s_temporary_outlier_deletion=true;
 			OutlierPointCloudEngine.CreatePointCloud( doc, file_full_name, points, Transform.Identity, subdivision );
 
+			FindSurface.CleanUp();
 			FindSurface.SetPointCloud( xyz_array );
 		}
 
@@ -226,6 +227,7 @@ namespace FindSurfaceRevitPlugin
 			FindSurfaceRevitPluginUtils.Pack( s_xyz, s_color, out points );
 			OutlierPointCloudEngine.CreatePointCloud( document, s_file_full_name, points, Transform.Identity, s_subdivision );
 
+			FindSurface.CleanUp();
 			FindSurface.SetPointCloud( s_xyz );
 			return true;
 		}

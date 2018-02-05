@@ -362,6 +362,7 @@ namespace FindSurfaceRevitPlugin
 			OutlierPointCloudEngine.CreatePointCloud( doc, "Outlier", outlier_point_list.ToArray(), outlier_transform, s_subdivision );
 
 			// give new outlier points to FindSurface.
+			FindSurface.CleanUp();
 			FindSurface.SetPointCloud( outlier_xyz.ToArray() );
 
 			// create inlier point cloud.
