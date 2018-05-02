@@ -52,6 +52,7 @@ In order to perform the following functions below, click on a surface of a point
 	- Sphere: finding a sphere around the given surface of the point cloud.
 	- Cylinder: finding a cylinder around the given surface of the point cloud. 
 	- Cone: finding either a cone or a conical frustum from the given surface of the point cloud.
+	- Torus: finding a torus around the given surface of the point cloud.
 	- Any shape: finding a most appropriate primitive from the given surface of the point cloud.
 
 In order to perform the following functions below, click two surfaces of point cloud consequently after pressing a button.
