@@ -1,6 +1,9 @@
 # FindSurface-Samples / FindSurfaceRevitPlugin / Readme.md
 **Curv*Surf* FindSurface™ SDK** Sample - FindSurfaceRevitPlugin
 
+> Note: The content in this repository has been deprecated. See [this page](https://github.com/CurvSurf/FindSurface) instead.
+
+
 Overview
 --------
 
